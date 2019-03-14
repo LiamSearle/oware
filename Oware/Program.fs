@@ -58,28 +58,36 @@ let gameState board = failwith "Not implemented"
 
 [<EntryPoint>]
 let main _ =
-    let player1 = {player.score = 5; side = StartingPosition.North; isTurn = true; victory = false }
+    let player1 = {player.score = 0; side = StartingPosition.North; isTurn = true; victory = false }
     let player2 = {player.score = 0; side = StartingPosition.South; isTurn = false; victory = false }
 
     let house1 = {house.number = 1; numSeeds = 4}
     let house2 = {house.number = 2; numSeeds = 4}
-
-    let house3 = {house2 with number = 3}
-    let house3 = {house3 with numSeeds = house3.numSeeds+1}
-    
-    let {house.number = 3} = house3
+    let house3 = {house.number = 3; numSeeds = 4}
+    let house4 = {house.number = 4; numSeeds = 4}
+    let house5 = {house.number = 5; numSeeds = 4}
+    let house6 = {house.number = 6; numSeeds = 4}
+    let house7 = {house.number = 7; numSeeds = 4}
+    let house8 = {house.number = 8; numSeeds = 4}
+    let house9 = {house.number = 9; numSeeds = 4}
+    let house10 = {house.number = 10; numSeeds = 4}
+    let house11 = {house.number = 11; numSeeds = 4}
+    let house12 = {house.number = 12; numSeeds = 4}
+    //let house3 = {house2 with number = 3}
+    //let house3 = {house3 with numSeeds = house3.numSeeds+1}
+    //let {house.number = 3} = house3
     
 
     //------------------------------------Game output-------------------------------------------
-    printfn "|________Player 1 score_________|" 
-    printfn "|-----------|~~%i~~|------------|" player1.score
-    printfn "|-------------------------------|"
-    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" house12.number house11.number house10.number house9.number house8.number house7.number 
-    printfn "|-------------------------------|" //start bottom left to move in counter-clockwise direction
-    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" house1.number house2.number house3.number house4.number house5.number house6.number 
-    printfn "|-------------------------------|"
-    printfn "|-----------|~~%i~~|------------|" player2.score
-    printfn "|________Player 2 score_________|" 
+    printfn "|~~~~~~~|Player 1 score|~~~~~~~~~|"
+    printfn "|------------|~~%i~~|-------------|" player1.score
+    printfn "|--------------------------------|"
+    printfn "|--[%i]--[%i]--[%i]--[%i]--[%i]--[%i]--|" house12.numSeeds house11.numSeeds house10.numSeeds house9.numSeeds house8.numSeeds house7.numSeeds 
+    printfn "|--------------------------------|" //start bottom left to move in counter-clockwise direction
+    printfn "|--[%i]--[%i]--[%i]--[%i]--[%i]--[%i]--|" house1.numSeeds house2.numSeeds house3.numSeeds house4.numSeeds house5.numSeeds house6.numSeeds 
+    printfn "|--------------------------------|"
+    printfn "|------------|~~%i~~|-------------|" player2.score
+    printfn "|~~~~~~~|Player 2 score|~~~~~~~~~|" 
     //----------------------------------Game output end----------------------------------------
 
     0 // return an integer exit code
