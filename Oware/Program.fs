@@ -40,8 +40,6 @@ let useHouse n board = failwith "Not implemented"
 person in the StartingPosition starts the game*)
 let start position  = failwith "Not implemented"
 
-failwith "Not implemented"
-
 (*score, which accepts a board and gives back a tuple of (southScore , northScore)*)
 let score board = failwith "Not implemented"
 
@@ -52,5 +50,13 @@ let gameState board = failwith "Not implemented"
 
 [<EntryPoint>]
 let main _ =
+    let x = {player.score = 5; side = StartingPosition.North; isTurn = true; victory = false }
+    let y = {house.number = 12; numSeeds = 14}
+    let z = {house.number = 4; numSeeds = 52}
+    let z = {z with numSeeds = 14}
+    let {house.number = 3} = y
+    
+
     printfn "Hello from F#!"
+    printfn "An int: %i." x.score
     0 // return an integer exit code
