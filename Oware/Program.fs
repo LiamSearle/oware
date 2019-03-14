@@ -4,8 +4,8 @@
 module Oware
 
 type StartingPosition =
-    | South
     | North
+    | South
   (*North
       ^
       |
