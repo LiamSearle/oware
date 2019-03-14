@@ -6,6 +6,11 @@ module Oware
 type StartingPosition =
     | South
     | North
+  (*North
+      ^
+      |
+      v
+    South*)
 
 (*getSeeds, which accepts a house number and a board, and returns the number of
 seeds in the specified house*)
