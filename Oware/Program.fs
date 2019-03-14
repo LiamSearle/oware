@@ -24,17 +24,24 @@ type game = {//has 12 houses & 2 players
   board:(house * house * house * house * house * house * house * house * house * house * house * house * house * house)
   players: (player * player)
 }
-
-
  //--------------------------------------End Types--------------------------
+ 
 
 (*getSeeds, which accepts a house number and a board, and returns the number of
 seeds in the specified house*)
+//gets seeds at that house
 let getSeeds n board = failwith "Not implemented"
 
 (*useHouse, which accepts a house number and a board, and makes a move using
 that house.*)
-let useHouse n board = failwith "Not implemented"
+//getSeeds, count the seeds and itt. through them to distribute to houses greater than the orig, can't use foe's house
+let useHouse n board = 
+    let rec cnt j k = 
+        match j/10 = 0 with
+        |true -> k
+        |_ -> cnt (j/10) (k + 1) 
+    cnt n 1
+//failwith "Not implemented"
 
 (*start, which accepts a StartingPosition and returns an initialized game where the
 person in the StartingPosition starts the game*)
