@@ -16,10 +16,13 @@ type StartingPosition =
 type player = {
   score: int
   side: StartingPosition
+  isTurn: bool
+  victory: bool
 }
 
-type game = {//has 12 houses
+type game = {//has 12 houses & 2 players
   board:(house * house * house * house * house * house * house * house * house * house * house * house * house * house)
+  players: (player * player)
 }
  //--------------------------------------End Types--------------------------
  
