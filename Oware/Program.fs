@@ -12,10 +12,6 @@ type house = {
 type StartingPosition =
     | North
     | South
-    //Just adding some kak to test git stuff
-    | West
-    | East
-    
 
 type player = {
   score: int
