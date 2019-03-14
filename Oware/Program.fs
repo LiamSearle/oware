@@ -3,18 +3,27 @@
 //
 module Oware
 
-type board = {
-  houses:(int * int * int * int * int * int * int)
+ //--------------------------------------Types--------------------------
+type house = {
+   number: int
+   numSeeds: int
 }
 
 type StartingPosition =
     | North
     | South
-  (*North
-      ^
-      |
-      v
-    South*)
+
+type player = {
+  score: int
+  side: StartingPosition
+}
+
+type game = {//has 12 houses
+  board:(house * house * house * house * house * house * house * house * house * house * house * house * house * house)
+}
+
+
+ //--------------------------------------End Types--------------------------
 
 (*getSeeds, which accepts a house number and a board, and returns the number of
 seeds in the specified house*)
