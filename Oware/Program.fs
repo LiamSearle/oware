@@ -12,6 +12,10 @@ type house = {
 type StartingPosition =
     | North
     | South
+    //Just adding some kak to test git stuff
+    | West
+    | East
+    
 
 type player = {
   score: int
@@ -21,9 +25,8 @@ type player = {
 type game = {//has 12 houses
   board:(house * house * house * house * house * house * house * house * house * house * house * house * house * house)
 }
-
-
  //--------------------------------------End Types--------------------------
+ 
 
 (*getSeeds, which accepts a house number and a board, and returns the number of
 seeds in the specified house*)
