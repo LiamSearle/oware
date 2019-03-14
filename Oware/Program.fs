@@ -3,6 +3,10 @@
 //
 module Oware
 
+type board = {
+  houses:(int * int * int * int * int * int * int)
+}
+
 type StartingPosition =
     | North
     | South
@@ -22,9 +26,8 @@ let useHouse n board = failwith "Not implemented"
 
 (*start, which accepts a StartingPosition and returns an initialized game where the
 person in the StartingPosition starts the game*)
-let start position  = {
-    let p = (int * int * int * int * int * int * int * int) //(4,4,4,4,4,4,4,4,4,4,4,4)
-}
+let start position  = failwith "Not implemented"
+
 failwith "Not implemented"
 
 (*score, which accepts a board and gives back a tuple of (southScore , northScore)*)
