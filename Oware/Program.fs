@@ -22,7 +22,10 @@ let useHouse n board = failwith "Not implemented"
 
 (*start, which accepts a StartingPosition and returns an initialized game where the
 person in the StartingPosition starts the game*)
-let start position = failwith "Not implemented"
+let start position  = {
+    let p = (int * int * int * int * int * int * int * int) //(4,4,4,4,4,4,4,4,4,4,4,4)
+}
+failwith "Not implemented"
 
 (*score, which accepts a board and gives back a tuple of (southScore , northScore)*)
 let score board = failwith "Not implemented"
