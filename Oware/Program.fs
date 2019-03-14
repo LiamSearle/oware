@@ -23,7 +23,7 @@ type player = {
 type game = {//has 12 houses & 2 players
   board:(house * house * house * house * house * house * house * house * house * house * house * house * house * house)
   players: (player * player)
-  //toWin: int <- 25
+  toWin: int //player wins with 25 seeds.       Should we keep this here?
 }
  //--------------------------------------End Types--------------------------
  
@@ -62,7 +62,6 @@ let main _ =
     let player2 = {player.score = 0; side = StartingPosition.South; isTurn = false; victory = false }
 
     let house1 = {house.number = 1; numSeeds = 4}
-    
     let house2 = {house.number = 2; numSeeds = 4}
 
     let house3 = {house2 with number = 3}
@@ -70,8 +69,17 @@ let main _ =
     
     let {house.number = 3} = house3
     
-    
 
-    printfn "Hello from F#!"
-    printfn "Player 1 score: %i. Player 2 score: %i." player1.score player2.score
+    //------------------------------------Game output-------------------------------------------
+    printfn "|________Player 1 score_________|" 
+    printfn "|-----------|~~%i~~|------------|" player1.score
+    printfn "|-------------------------------|"
+    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" house12.number house11.number house10.number house9.number house8.number house7.number 
+    printfn "|-------------------------------|" //start bottom left to move in counter-clockwise direction
+    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" house1.number house2.number house3.number house4.number house5.number house6.number 
+    printfn "|-------------------------------|"
+    printfn "|-----------|~~%i~~|------------|" player2.score
+    printfn "|________Player 2 score_________|" 
+    //----------------------------------Game output end----------------------------------------
+
     0 // return an integer exit code
