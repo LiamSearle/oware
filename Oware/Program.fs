@@ -75,7 +75,8 @@ let gameState Board = failwith "Not implemented"
 
 [<EntryPoint>]
 let main _ =
-    let player1 = {player.score = 0; side = StartingPosition.North; isTurn = true; victory = false }
+    //---------------------------------This needs to go into a method -------------------------------
+    (*let player1 = {player.score = 0; side = StartingPosition.North; isTurn = true; victory = false }
     let player2 = {player.score = 0; side = StartingPosition.South; isTurn = false; victory = false }
 
     let house1 = {house.number = 1; numSeeds = 4}
@@ -89,7 +90,10 @@ let main _ =
     let house9 = {house.number = 9; numSeeds = 4}
     let house10 = {house.number = 10; numSeeds = 4}
     let house11 = {house.number = 11; numSeeds = 4}
-    let house12 = {house.number = 12; numSeeds = 4}
+    let house12 = {house.number = 12; numSeeds = 4}*)
+    //---------------------------------This needs to go into a method end ---------------------------
+
+    
     //let house3 = {house2 with number = 3}
     //let house3 = {house3 with numSeeds = house3.numSeeds+1}
     //let {house.number = 3} = house3
