@@ -96,7 +96,7 @@ let main _ =
     
 
     //------------------------------------Game output-------------------------------------------
-    printfn "|~~~~~~~|Player 1 score|~~~~~~~~~|"
+    (*printfn "|~~~~~~~|Player 1 score|~~~~~~~~~|"
     printfn "|------------|~~%i~~|-------------|" player1.score
     printfn "|--------------------------------|"
     printfn "|--[%i]--[%i]--[%i]--[%i]--[%i]--[%i]--|" house12.numSeeds house11.numSeeds house10.numSeeds house9.numSeeds house8.numSeeds house7.numSeeds 
@@ -104,7 +104,7 @@ let main _ =
     printfn "|--[%i]--[%i]--[%i]--[%i]--[%i]--[%i]--|" house1.numSeeds house2.numSeeds house3.numSeeds house4.numSeeds house5.numSeeds house6.numSeeds 
     printfn "|--------------------------------|"
     printfn "|------------|~~%i~~|-------------|" player2.score
-    printfn "|~~~~~~~|Player 2 score|~~~~~~~~~|" 
+    printfn "|~~~~~~~|Player 2 score|~~~~~~~~~|" *)
     //----------------------------------Game output end----------------------------------------
 
     0 // return an integer exit code
