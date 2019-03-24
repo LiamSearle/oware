@@ -83,13 +83,13 @@ person in the StartingPosition starts the game*)
 let start position = 
   match position with  
   |North -> {
-    Board = {board.a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4 }
+    a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;
     PlayerNorth = {score = 0; side = North; isTurn = true; victory = false}
     PlayerSouth = {score = 0; side = South; isTurn = false; victory = false}
     toWin = 25
     }
   |South -> {
-    gameBoard = {a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;}
+    a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;
     PlayerNorth = {score = 0; side = North; isTurn = false; victory = false}
     PlayerSouth = {score = 0; side = South; isTurn = true; victory = false}
     toWin = 25
