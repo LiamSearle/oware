@@ -87,7 +87,7 @@ let useHouse n board = failwith "Not implemented"
 (*start, which accepts a StartingPosition and returns an initialized game where the
 person in the StartingPosition starts the game*)
 let start position = 
- let Game1 = match position with  
+ match position with  
   |North -> {
     gameBoard = {a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;}
     PlayerNorth = {score = 0; side = North; isTurn = true; victory = false}
@@ -101,7 +101,7 @@ let start position =
     toWin = 25
     }
   |_ -> failwith "Error in start"
- Game1
+ 
  
  (* let Game1 = {
     gameBoard = {a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;}
