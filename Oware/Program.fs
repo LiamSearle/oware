@@ -21,8 +21,8 @@ type Player = {
 }
 
 type Board = {
-  House1: int; House2: int; House3: int; House4: int; House5: int; House6: int; 
-  House7: int; House8: int; House9: int; House10: int; House11: int; House12: int; 
+  a: int; b: int; c: int; d: int; e: int; f: int; 
+  a': int; b': int; c': int; d': int; e': int; f': int; 
   //b: [House1; House2; House3; House4]
 }
 
@@ -41,18 +41,18 @@ seeds in the specified House*)
 //gets seeds at that House
 let getSeeds n Board = //failwith "Not implemented"
   let returnVal = function
-  |1 -> Board.House1
-  |2 -> Board.House2
-  |3 -> Board.House3
-  |4 -> Board.House4
-  |5 -> Board.House5
-  |6 -> Board.House6
-  |7 -> Board.House7
-  |8 -> Board.House8
-  |9 -> Board.House9
-  |10 -> Board.House10
-  |11 -> Board.House11
-  |12 -> Board.House12
+  |1 -> Board.a
+  |2 -> Board.b
+  |3 -> Board.c
+  |4 -> Board.d
+  |5 -> Board.e
+  |6 -> Board.f
+  |7 -> Board.a'
+  |8 -> Board.b'
+  |9 -> Board.c'
+  |10 -> Board.d'
+  |11 -> Board.e'
+  |12 -> Board.f'
   |_ -> failwith "invalid House"
   returnVal
 
@@ -71,7 +71,7 @@ let useHouse n Board =
 (*start, which accepts a StartingPosition and returns an initialized game where the
 person in the StartingPosition starts the game*)
 let start position = 
-  let x = {Board.House1 = 4; House2 = 4; House3 = 4; House4 = 4; House5 = 4; House6 = 4; House7 = 4; House8 = 4; House9 = 4; House10 = 4; House11 = 4; House12 = 4}
+  let x = {Board.a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4}
   x
   
 
@@ -89,9 +89,9 @@ let outputGame game = //function that takes in a game and prints out the Board a
     printfn "|________Player 1 score_________|" 
     printfn "|-----------|~~%i~~|------------|" game.PlayerNorth.score
     printfn "|-------------------------------|"
-    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.gameBoard.House12 game.gameBoard.House11 game.gameBoard.House10 game.gameBoard.House9 game.gameBoard.House8 game.gameBoard.House7 
+    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.gameBoard.a' game.gameBoard.b' game.gameBoard.c' game.gameBoard.d' game.gameBoard.e' game.gameBoard.f' 
     printfn "|-------------------------------|" //start bottom left to move in counter-clockwise direction
-    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.gameBoard.House1 game.gameBoard.House2 game.gameBoard.House3 game.gameBoard.House4 game.gameBoard.House5 game.gameBoard.House6  
+    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.gameBoard.a game.gameBoard.b game.gameBoard.c game.gameBoard.d game.gameBoard.e game.gameBoard.f  
     printfn "|-------------------------------|"
     printfn "|-----------|~~%i~~|------------|" game.PlayerSouth.score
     printfn "|________Player 2 score_________|"
