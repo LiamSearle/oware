@@ -51,9 +51,8 @@ let outputGame game = //function that takes in a game and prints out the Board a
 (*getSeeds, which accepts a House number and a Board, and returns the number of
 seeds in the specified House*)
 //gets seeds at that House
-let getSeeds n Board = failwith "Not implemented"
-  (*let returnVal = function
-  
+let getSeeds n Board = //failwith "Not implemented"
+  let returnVal = function
   |1 -> Board.House1
   |2 -> Board.House2
   |3 -> Board.House3
@@ -67,7 +66,7 @@ let getSeeds n Board = failwith "Not implemented"
   |11 -> Board.House11
   |12 -> Board.House12
   |_ -> failwith "invalid House"
-  returnVal*)
+  returnVal
 
 
 (*useHouse, which accepts a House number and a Board, and makes a move using
