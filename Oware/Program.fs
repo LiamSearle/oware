@@ -61,6 +61,19 @@ let getSeeds n Board = //failwith "Not implemented"
 (*useHouse, which accepts a House number and a Board, and makes a move using
 that House.*)
 //getSeeds, count the seeds and itt. through them to distribute to Houses greater than the orig, can't use foe's House
+//
+//
+//Psuedo Code
+//
+//get the number of seeds from the given house
+//know which players turn it is
+//add 1 seed to each house after it
+//check if the total of the last house sums to 2 or 3
+//if it is check the one before it, do this recursivly untill != (2 or 3).
+//add the points to the player and remove them from the game
+//
+//end psuedo code
+
 let useHouse n Board = 
     let rec cnt j k = 
         match j = 0 with //doesn't work yet needs to be properly implemented.
