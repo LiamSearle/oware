@@ -26,14 +26,6 @@ type Board = {
   //North: [a; b; c; d; e; f]
 }
 
-
-type Game = {//has 12 Houses & 2 Players
-  gameBoard: Board
-  PlayerNorth: Player
-  PlayerSouth: Player
-  //StartingPlayer: StartingPosition 
-  toWin: int //Player wins with 25 seeds.       Should we keep this here?
-}
 //--------------------------------------End Types--------------------------
  
 
@@ -87,7 +79,7 @@ let useHouse n board = failwith "Not implemented"
 (*start, which accepts a StartingPosition and returns an initialized game where the
 person in the StartingPosition starts the game*)
 let start position = 
- match position with  
+  match position with  
   |North -> {
     gameBoard = {a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;}
     PlayerNorth = {score = 0; side = North; isTurn = true; victory = false}
