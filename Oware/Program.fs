@@ -83,13 +83,13 @@ person in the StartingPosition starts the game*)
 let start position = 
   match position with  
   |North -> {
-    Board = {board.a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4 }
+    a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4
     PlayerNorth = {score = 0; side = North; isTurn = true; victory = false}
     PlayerSouth = {score = 0; side = South; isTurn = false; victory = false}
     toWin = 25
     }
   |South -> {
-    gameBoard = {a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;}
+    a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;
     PlayerNorth = {score = 0; side = North; isTurn = false; victory = false}
     PlayerSouth = {score = 0; side = South; isTurn = true; victory = false}
     toWin = 25
@@ -125,9 +125,9 @@ let outputGame game = //function that takes in a game and prints out the Board a
     printfn "|________Player 1 score_________|" 
     printfn "|-----------|~~%i~~|------------|" game.PlayerNorth.score
     printfn "|-------------------------------|"
-    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.gameBoard.a' game.gameBoard.b' game.gameBoard.c' game.gameBoard.d' game.gameBoard.e' game.gameBoard.f' 
+    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.a' game.b' game.c' game.d' game.e' game.f' 
     printfn "|-------------------------------|" //start bottom left to move in counter-clockwise direction
-    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.gameBoard.a game.gameBoard.b game.gameBoard.c game.gameBoard.d game.gameBoard.e game.gameBoard.f  
+    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.a game.b game.c game.d game.e game.f  
     printfn "|-------------------------------|"
     printfn "|-----------|~~%i~~|------------|" game.PlayerSouth.score
     printfn "|________Player 2 score_________|"
