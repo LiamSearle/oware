@@ -10,8 +10,8 @@ module Oware
 //}
 
 type StartingPosition =
-    | North
-    | South
+  | North
+  | South
 
 type Player = {
   score: int
@@ -31,18 +31,6 @@ type Game = {//has 12 Houses & 2 Players
   toWin: int //Player wins with 25 seeds.       Should we keep this here?
 }
  //--------------------------------------End Types--------------------------
- 
-let outputGame game = //function that takes in a game and prints out the Board and scores
-    printfn "|________Player 1 score_________|" 
-    printfn "|-----------|~~%i~~|------------|" game.Player1.score
-    printfn "|-------------------------------|"
-    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.gameBoard.House12 game.gameBoard.House11 game.gameBoard.House10 game.gameBoard.House9 game.gameBoard.House8 game.gameBoard.House7 
-    printfn "|-------------------------------|" //start bottom left to move in counter-clockwise direction
-    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.gameBoard.House1 game.gameBoard.House2 game.gameBoard.House3 game.gameBoard.House4 game.gameBoard.House5 game.gameBoard.House6  
-    printfn "|-------------------------------|"
-    printfn "|-----------|~~%i~~|------------|" game.Player2.score
-    printfn "|________Player 2 score_________|"
-    ()
 
 
 (*getSeeds, which accepts a House number and a Board, and returns the number of
@@ -72,6 +60,18 @@ let score Board = failwith "Not implemented"
 state of the game. Valid strings are “South’s turn”, “North’s turn”, “Game ended in a
 draw”, “South won”, and “North won”.*)
 let gameState Board = failwith "Not implemented"
+
+let outputGame game = //function that takes in a game and prints out the Board and scores
+    printfn "|________Player 1 score_________|" 
+    printfn "|-----------|~~%i~~|------------|" game.Player1.score
+    printfn "|-------------------------------|"
+    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.gameBoard.House12 game.gameBoard.House11 game.gameBoard.House10 game.gameBoard.House9 game.gameBoard.House8 game.gameBoard.House7 
+    printfn "|-------------------------------|" //start bottom left to move in counter-clockwise direction
+    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.gameBoard.House1 game.gameBoard.House2 game.gameBoard.House3 game.gameBoard.House4 game.gameBoard.House5 game.gameBoard.House6  
+    printfn "|-------------------------------|"
+    printfn "|-----------|~~%i~~|------------|" game.Player2.score
+    printfn "|________Player 2 score_________|"
+    ()
 
 [<EntryPoint>]
 let main _ =
