@@ -23,7 +23,9 @@ type Player = {
 type Board = {
   a: int; b: int; c: int; d: int; e: int; f: int; 
   a': int; b': int; c': int; d': int; e': int; f': int; 
-  //North: [a; b; c; d; e; f]
+  PlayerNorth: Player
+  PlayerSouth: Player
+  toWin: int
 }
 
 //--------------------------------------End Types--------------------------
@@ -81,7 +83,7 @@ person in the StartingPosition starts the game*)
 let start position = 
   match position with  
   |North -> {
-    gameBoard = {a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;}
+    Board = {board.a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4 }
     PlayerNorth = {score = 0; side = North; isTurn = true; victory = false}
     PlayerSouth = {score = 0; side = South; isTurn = false; victory = false}
     toWin = 25
