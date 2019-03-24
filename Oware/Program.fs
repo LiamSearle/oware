@@ -20,9 +20,12 @@ type Player = {
   victory: bool
 }
 type Board = {
+  
   House1: int; House2: int; House3: int; House4: int; House5: int; House6: int; 
   House7: int; House8: int; House9: int; House10: int; House11: int; House12: int; 
+  //b: [House1; House2; House3; House4]
 }
+
 
 type Game = {//has 12 Houses & 2 Players
   gameBoard: Board
@@ -36,7 +39,23 @@ type Game = {//has 12 Houses & 2 Players
 (*getSeeds, which accepts a House number and a Board, and returns the number of
 seeds in the specified House*)
 //gets seeds at that House
-let getSeeds n Board = failwith "Not implemented"
+let getSeeds n Board = //failwith "Not implemented"
+  let returnVal = function
+  |1 -> Board.House1
+  |2 -> Board.House2
+  |3 -> Board.House3
+  |4 -> Board.House4
+  |5 -> Board.House5
+  |6 -> Board.House6
+  |7 -> Board.House7
+  |8 -> Board.House8
+  |9 -> Board.House9
+  |10 -> Board.House10
+  |11 -> Board.House11
+  |12 -> Board.House12
+  |_ -> failwith "invalid House"
+  returnVal
+
 
 (*useHouse, which accepts a House number and a Board, and makes a move using
 that House.*)
@@ -51,7 +70,7 @@ let useHouse n Board =
 
 (*start, which accepts a StartingPosition and returns an initialized game where the
 person in the StartingPosition starts the game*)
-let start position  = failwith "Not implemented"
+let start position = failwith "Not implemented"
 
 (*score, which accepts a Board and gives back a tuple of (southScore , northScore)*)
 let score Board = failwith "Not implemented"
