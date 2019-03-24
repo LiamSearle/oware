@@ -31,6 +31,7 @@ type Game = {//has 12 Houses & 2 Players
   gameBoard: Board
   PlayerNorth: Player
   PlayerSouth: Player
+  StartingPlayer: StartingPosition 
   toWin: int //Player wins with 25 seeds.       Should we keep this here?
 }
  //--------------------------------------End Types--------------------------
@@ -71,8 +72,9 @@ let useHouse n Board =
 (*start, which accepts a StartingPosition and returns an initialized game where the
 person in the StartingPosition starts the game*)
 let start position = 
-  let x = {Board.House1 = 4; House2 = 4; House3 = 4; House4 = 4; House5 = 4; House6 = 4; House7 = 4; House8 = 4; House9 = 4; House10 = 4; House11 = 4; House12 = 4}
-  x
+  let Game1 = {Board.House1 = 4; House2 = 4; House3 = 4; House4 = 4; House5 = 4; House6 = 4; House7 = 4; House8 = 4; House9 = 4; House10 = 4; House11 = 4; House12 = 4; StartingPlayer = start;
+              }
+  Game1
   
 
 //failwith "Not implemented"
