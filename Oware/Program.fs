@@ -29,21 +29,21 @@ type Board = {
 
 type Game = {//has 12 Houses & 2 Players
   gameBoard: Board
-  Player1: Player
-  Player2: Player
+  PlayerNorth: Player
+  PlayerSouth: Player
   toWin: int //Player wins with 25 seeds.       Should we keep this here?
 }
  //--------------------------------------End Types--------------------------
  
 let outputGame game = //function that takes in a game and prints out the Board and scores
     printfn "|________Player 1 score_________|" 
-    printfn "|-----------|~~%i~~|------------|" game.Player1.score
+    printfn "|-----------|~~%i~~|------------|" game.PlayerNorth.score
     printfn "|-------------------------------|"
     printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.gameBoard.House12 game.gameBoard.House11 game.gameBoard.House10 game.gameBoard.House9 game.gameBoard.House8 game.gameBoard.House7 
     printfn "|-------------------------------|" //start bottom left to move in counter-clockwise direction
     printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.gameBoard.House1 game.gameBoard.House2 game.gameBoard.House3 game.gameBoard.House4 game.gameBoard.House5 game.gameBoard.House6  
     printfn "|-------------------------------|"
-    printfn "|-----------|~~%i~~|------------|" game.Player2.score
+    printfn "|-----------|~~%i~~|------------|" game.PlayerSouth.score
     printfn "|________Player 2 score_________|"
     ()
 
@@ -51,8 +51,9 @@ let outputGame game = //function that takes in a game and prints out the Board a
 (*getSeeds, which accepts a House number and a Board, and returns the number of
 seeds in the specified House*)
 //gets seeds at that House
-let getSeeds n Board = //failwith "Not implemented"
-  let returnVal = function
+let getSeeds n Board = failwith "Not implemented"
+  (*let returnVal = function
+  
   |1 -> Board.House1
   |2 -> Board.House2
   |3 -> Board.House3
@@ -66,7 +67,7 @@ let getSeeds n Board = //failwith "Not implemented"
   |11 -> Board.House11
   |12 -> Board.House12
   |_ -> failwith "invalid House"
-  returnVal
+  returnVal*)
 
 
 (*useHouse, which accepts a House number and a Board, and makes a move using
@@ -95,8 +96,8 @@ let gameState Board = failwith "Not implemented"
 [<EntryPoint>]
 let main _ =
     //---------------------------------This needs to go into a method -------------------------------
-    (*let player1 = {player.score = 0; side = StartingPosition.North; isTurn = true; victory = false }
-    let player2 = {player.score = 0; side = StartingPosition.South; isTurn = false; victory = false }
+    (*let PlayerNorth = {player.score = 0; side = StartingPosition.North; isTurn = true; victory = false }
+    let PlayerSouth = {player.score = 0; side = StartingPosition.South; isTurn = false; victory = false }
 
     let house1 = {house.number = 1; numSeeds = 4}
     let house2 = {house.number = 2; numSeeds = 4}
@@ -120,13 +121,13 @@ let main _ =
 
     //------------------------------------Game output-------------------------------------------
     (*printfn "|~~~~~~~|Player 1 score|~~~~~~~~~|"
-    printfn "|------------|~~%i~~|-------------|" player1.score
+    printfn "|------------|~~%i~~|-------------|" PlayerNorth.score
     printfn "|--------------------------------|"
     printfn "|--[%i]--[%i]--[%i]--[%i]--[%i]--[%i]--|" house12.numSeeds house11.numSeeds house10.numSeeds house9.numSeeds house8.numSeeds house7.numSeeds 
     printfn "|--------------------------------|" //start bottom left to move in counter-clockwise direction
     printfn "|--[%i]--[%i]--[%i]--[%i]--[%i]--[%i]--|" house1.numSeeds house2.numSeeds house3.numSeeds house4.numSeeds house5.numSeeds house6.numSeeds 
     printfn "|--------------------------------|"
-    printfn "|------------|~~%i~~|-------------|" player2.score
+    printfn "|------------|~~%i~~|-------------|" PlayerSouth.score
     printfn "|~~~~~~~|Player 2 score|~~~~~~~~~|" *)
     //----------------------------------Game output end----------------------------------------
 
