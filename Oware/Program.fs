@@ -31,7 +31,7 @@ type Game = {//has 12 Houses & 2 Players
   gameBoard: Board
   PlayerNorth: Player
   PlayerSouth: Player
-  StartingPlayer: StartingPosition 
+  //StartingPlayer: StartingPosition 
   toWin: int //Player wins with 25 seeds.       Should we keep this here?
 }
 //--------------------------------------End Types--------------------------
@@ -85,14 +85,40 @@ let useHouse n Board =
 (*start, which accepts a StartingPosition and returns an initialized game where the
 person in the StartingPosition starts the game*)
 let start position = 
-  let Game1 = {Board.a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4 }//Game.StartingPlayer = start }
-  Game1
+ let Game1 = match position with  
+  |North -> {
+    gameBoard = {a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;}
+    PlayerNorth = {score = 0; side = North; isTurn = true; victory = false}
+    PlayerSouth = {score = 0; side = South; isTurn = false; victory = false}
+    toWin = 25
+    }
+  |South -> {
+    gameBoard = {a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;}
+    PlayerNorth = {score = 0; side = North; isTurn = false; victory = false}
+    PlayerSouth = {score = 0; side = South; isTurn = true; victory = false}
+    toWin = 25
+    }
+  |_ -> failwith "Error in start"
+ Game1
+ 
+ (* let Game1 = {
+    gameBoard = {a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;}
+    PlayerNorth = {score = 0; side = North; isTurn = false; victory = false}
+    PlayerSouth = {score = 0; side = South; isTurn = false; victory = false}
+    toWin = 25
+    }//Game.StartingPlayer = start }
+    match position with
+    |South -> (PlayerSouth with isTurn = true)
+    |North -> (PlayerSouth with isTurn = true)
+    |_ -> failwith "Error in player turn"
+  Game1*)
   
 
 //failwith "Not implemented"
 
 (*score, which accepts a Board and gives back a tuple of (southScore , northScore)*)
 let score Board = failwith "Not implemented"
+
 
 (*gameState, which accepts a Board and gives back a string that tells us about the
 state of the game. Valid strings are “South’s turn”, “North’s turn”, “Game ended in a
