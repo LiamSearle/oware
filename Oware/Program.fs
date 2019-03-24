@@ -3,7 +3,7 @@
 //
 module Oware
 
- //--------------------------------------Types--------------------------
+//--------------------------------------Types--------------------------
 //type House = {
    //number: int
   // numSeeds: int
@@ -23,7 +23,7 @@ type Player = {
 type Board = {
   a: int; b: int; c: int; d: int; e: int; f: int; 
   a': int; b': int; c': int; d': int; e': int; f': int; 
-  //b: [House1; House2; House3; House4]
+  //North: [a; b; c; d; e; f]
 }
 
 
@@ -34,7 +34,7 @@ type Game = {//has 12 Houses & 2 Players
   StartingPlayer: StartingPosition 
   toWin: int //Player wins with 25 seeds.       Should we keep this here?
 }
- //--------------------------------------End Types--------------------------
+//--------------------------------------End Types--------------------------
  
 
 (*getSeeds, which accepts a House number and a Board, and returns the number of
@@ -63,17 +63,16 @@ that House.*)
 //getSeeds, count the seeds and itt. through them to distribute to Houses greater than the orig, can't use foe's House
 let useHouse n Board = 
     let rec cnt j k = 
-        match j/10 = 0 with
+        match j = 0 with //doesn't work yet needs to be properly implemented.
         |true -> k
-        |_ -> cnt (j/10) (k + 1) 
+        |_ -> cnt (j-1) (k + 1)
     cnt n 1
 //failwith "Not implemented"
 
 (*start, which accepts a StartingPosition and returns an initialized game where the
 person in the StartingPosition starts the game*)
 let start position = 
-  let Game1 = {Board.House1 = 4; House2 = 4; House3 = 4; House4 = 4; House5 = 4; House6 = 4; House7 = 4; House8 = 4; House9 = 4; House10 = 4; House11 = 4; House12 = 4; StartingPlayer = start;
-              }
+  let Game1 = {Board.a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4 }//Game.StartingPlayer = start }
   Game1
   
 
@@ -106,37 +105,6 @@ let main _ =
     //---------------------------------This needs to go into a method -------------------------------
     (*let PlayerNorth = {player.score = 0; side = StartingPosition.North; isTurn = true; victory = false }
     let PlayerSouth = {player.score = 0; side = StartingPosition.South; isTurn = false; victory = false }
-
-    let house1 = {house.number = 1; numSeeds = 4}
-    let house2 = {house.number = 2; numSeeds = 4}
-    let house3 = {house.number = 3; numSeeds = 4}
-    let house4 = {house.number = 4; numSeeds = 4}
-    let house5 = {house.number = 5; numSeeds = 4}
-    let house6 = {house.number = 6; numSeeds = 4}
-    let house7 = {house.number = 7; numSeeds = 4}
-    let house8 = {house.number = 8; numSeeds = 4}
-    let house9 = {house.number = 9; numSeeds = 4}
-    let house10 = {house.number = 10; numSeeds = 4}
-    let house11 = {house.number = 11; numSeeds = 4}
-    let house12 = {house.number = 12; numSeeds = 4}*)
-    //---------------------------------This needs to go into a method end ---------------------------
-
-    
-    //let house3 = {house2 with number = 3}
-    //let house3 = {house3 with numSeeds = house3.numSeeds+1}
-    //let {house.number = 3} = house3
-    
-
-    //------------------------------------Game output-------------------------------------------
-    (*printfn "|~~~~~~~|Player 1 score|~~~~~~~~~|"
-    printfn "|------------|~~%i~~|-------------|" PlayerNorth.score
-    printfn "|--------------------------------|"
-    printfn "|--[%i]--[%i]--[%i]--[%i]--[%i]--[%i]--|" house12.numSeeds house11.numSeeds house10.numSeeds house9.numSeeds house8.numSeeds house7.numSeeds 
-    printfn "|--------------------------------|" //start bottom left to move in counter-clockwise direction
-    printfn "|--[%i]--[%i]--[%i]--[%i]--[%i]--[%i]--|" house1.numSeeds house2.numSeeds house3.numSeeds house4.numSeeds house5.numSeeds house6.numSeeds 
-    printfn "|--------------------------------|"
-    printfn "|------------|~~%i~~|-------------|" PlayerSouth.score
-    printfn "|~~~~~~~|Player 2 score|~~~~~~~~~|" *)
-    //----------------------------------Game output end----------------------------------------
+    *)
 
     0 // return an integer exit code
