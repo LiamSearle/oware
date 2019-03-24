@@ -19,8 +19,8 @@ type Player = {
   isTurn: bool
   victory: bool
 }
+
 type Board = {
-  
   House1: int; House2: int; House3: int; House4: int; House5: int; House6: int; 
   House7: int; House8: int; House9: int; House10: int; House11: int; House12: int; 
   //b: [House1; House2; House3; House4]
@@ -70,7 +70,11 @@ let useHouse n Board =
 
 (*start, which accepts a StartingPosition and returns an initialized game where the
 person in the StartingPosition starts the game*)
-let start position = failwith "Not implemented"
+let start position = 
+  let x = { Board with House1 = 4; House2 = 4; House3 = 4; House4 = 4; House5 = 4; House6 = 4; House7 = 4; House8 = 4; House9 = 4; House10 = 4; House11 = 4; House12 = 4 }
+  
+
+//failwith "Not implemented"
 
 (*score, which accepts a Board and gives back a tuple of (southScore , northScore)*)
 let score Board = failwith "Not implemented"
