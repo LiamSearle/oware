@@ -60,15 +60,9 @@ let getSeeds n board = //Passes tests
 // N.B. you CAN'T take seeds from your own side
 //
 //end psuedo code
-<<<<<<< HEAD
-(*
-let collect (a,b,c,d,e,f,a',b',c',d',e',f') board= //failwith "Not implemented" //method to collect the seeds from a house and give them to a player
-  match board.PlayerTurn with 
-=======
 
-let collect (a,b,c,d,e,f,a',b',c',d',e',f') board= failwith "Not implemented" //method to collect the seeds from a house and give them to a player
+let collect (a,b,c,d,e,f,a',b',c',d',e',f') board = failwith "Not implemented" //method to collect the seeds from a house and give them to a player
  (* match board.PlayerTurn with 
->>>>>>> 1d0846f4fa0963c2fdfe39bc151da2a69dbc8413
     | North -> 
     | South ->
   let rec take house = 
@@ -76,13 +70,8 @@ let collect (a,b,c,d,e,f,a',b',c',d',e',f') board= failwith "Not implemented" //
     |2 | 3 -> take Previoushouse
     |_ -> ()
   ()
-<<<<<<< HEAD
-()  
-*)
-=======
 () *) 
 
->>>>>>> 1d0846f4fa0963c2fdfe39bc151da2a69dbc8413
 let addToSuburb n (a,b,c,d,e,f,a',b',c',d',e',f') =
   match n with 
     |1 -> (a+1,b,c,d,e,f,a',b',c',d',e',f')
@@ -165,10 +154,11 @@ let start position =
 (*
 Score: accepts a Board and gives back a tuple of (southScore , northScore)
 *)
-let score board = failwith ""
-  (*let playerSouth.score, playerNorth.score = board.playerSouth.score, board.playerNorth.score
-  playerSouth.score, playerNorth.score 
-*)
+let score board = 
+  let x,y = board.playerNorth.score, board.playerSouth.score
+  y,x
+
+
 (*
 gameState: accepts a Board and gives back a string that tells us about the
 state of the game. Valid strings are “South’s turn”, “North’s turn”, “Game ended in a
