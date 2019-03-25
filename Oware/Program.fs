@@ -23,10 +23,13 @@ type Player = {
   score: int
   houses: (int*int*int*int*int*int)
   //side: StartingPosition
-  isTurn: bool
+  //isTurn: bool
   //victory: bool //if both players have victory, we must have a draw
 }
 
+type Turn = 
+  | North 
+  | South
 
 type Board = {
   (* int; b: int; c: int; d: int; e: int; f: int; 
@@ -35,6 +38,7 @@ type Board = {
   playerNorth: Player
   playerSouth: Player
   toWin: int
+  PlayerTurn: Turn
 }
 
 //--------------------------------------End Types--------------------------
@@ -78,7 +82,9 @@ that House.*)
 //
 //end psuedo code
 
-let collect board house = //failwith "Not implemented" //method to collect the seeds from a house and give them to a player
+let collect (a,b,c,d,e,f,a',b',c',d',e',f') board= //failwith "Not implemented" //method to collect the seeds from a house and give them to a player
+  match 
+  
   let rec take house = 
     match board.house with 
     |2 | 3 -> take Previoushouse
