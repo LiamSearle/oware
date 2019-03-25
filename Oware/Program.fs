@@ -10,7 +10,6 @@ type StartingPosition =
 type Player = {
   score: int
   suburb: (int*int*int*int*int*int)
-  
 }
 
 type Turn = 
@@ -61,9 +60,15 @@ let getSeeds n board = //Passes tests
 // N.B. you CAN'T take seeds from your own side
 //
 //end psuedo code
+<<<<<<< HEAD
 (*
 let collect (a,b,c,d,e,f,a',b',c',d',e',f') board= //failwith "Not implemented" //method to collect the seeds from a house and give them to a player
   match board.PlayerTurn with 
+=======
+
+let collect (a,b,c,d,e,f,a',b',c',d',e',f') board= failwith "Not implemented" //method to collect the seeds from a house and give them to a player
+ (* match board.PlayerTurn with 
+>>>>>>> 1d0846f4fa0963c2fdfe39bc151da2a69dbc8413
     | North -> 
     | South ->
   let rec take house = 
@@ -71,8 +76,13 @@ let collect (a,b,c,d,e,f,a',b',c',d',e',f') board= //failwith "Not implemented" 
     |2 | 3 -> take Previoushouse
     |_ -> ()
   ()
+<<<<<<< HEAD
 ()  
 *)
+=======
+() *) 
+
+>>>>>>> 1d0846f4fa0963c2fdfe39bc151da2a69dbc8413
 let addToSuburb n (a,b,c,d,e,f,a',b',c',d',e',f') =
   match n with 
     |1 -> (a+1,b,c,d,e,f,a',b',c',d',e',f')
@@ -123,15 +133,15 @@ person in the StartingPosition starts the game
 let start position = 
   match position with  
   |North -> {
-    a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;
-    PlayerNorth = {score = 0; side = North; isTurn = true; victory = false}
-    PlayerSouth = {score = 0; side = South; isTurn = false; victory = false}
+    playerNorth = {score = 0; suburb = (4,4,4,4,4,4)}
+    playerSouth = {score = 0; suburb = (4,4,4,4,4,4)}
+    PlayerTurn = North
     toWin = 25
     }
   |South -> {
-    a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;
-    PlayerNorth = {score = 0; side = North; isTurn = false; victory = false}
-    PlayerSouth = {score = 0; side = South; isTurn = true; victory = false}
+    playerNorth = {score = 0; suburb = (4,4,4,4,4,4)}
+    playerSouth = {score = 0; suburb = (4,4,4,4,4,4)}
+    PlayerTurn = South
     toWin = 25
     }
   |_ -> failwith "Error in start"
@@ -155,10 +165,10 @@ let start position =
 (*
 Score: accepts a Board and gives back a tuple of (southScore , northScore)
 *)
-let score board = 
-  let playerSouth.score, playerNorth.score = board.playerSouth.score, board.playerNorth.score
+let score board = failwith ""
+  (*let playerSouth.score, playerNorth.score = board.playerSouth.score, board.playerNorth.score
   playerSouth.score, playerNorth.score 
-
+*)
 (*
 gameState: accepts a Board and gives back a string that tells us about the
 state of the game. Valid strings are “South’s turn”, “North’s turn”, “Game ended in a
@@ -166,33 +176,33 @@ draw”, “South won”, and “North won”.
 *)
 let gameState board = 
    let a,b = score board
-   match x > 24 with 
+   match a > 24 with 
    |true -> "South won"
-   |false -> match y > 24  with 
+   |false -> match b > 24  with 
             |true -> "North won"
-            |false -> match x = 24 && y = 24 with 
+            |false -> match a = 24 && b = 24 with 
                       |true ->  "Game ended in a draw"
                       |false ->  match board.PlayerTurn with  
                                 |South -> "South's turn"
                                 |North -> "North's turn"
 
 
-let outputGame game = //function that takes in a game and prints out the Board and scores
-    printfn "|________Player 1 score_________|" 
-    printfn "|-----------|~~%i~~|------------|" game.PlayerNorth.score
-    printfn "|-------------------------------|"
-    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.a' game.b' game.c' game.d' game.e' game.f' 
-    printfn "|-------------------------------|" //start bottom left to move in counter-clockwise direction
-    printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" game.a game.b game.c game.d game.e game.f  
-    printfn "|-------------------------------|"
-    printfn "|-----------|~~%i~~|------------|" game.PlayerSouth.score
-    printfn "|________Player 2 score_________|"
-    ()
+let outputGame board = //function that takes in a game and prints out the Board and scores
+  let (a,b,c,d,e,f),(a',b',c',d',e',f') = board.playerNorth.suburb, board.playerSouth.suburb
+  printfn "|________Player 1 score_________|" 
+  printfn "|-----------|~~%i~~|------------|" board.playerNorth.score
+  printfn "|-------------------------------|"
+  printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" a b c d e f 
+  printfn "|-------------------------------|" //start bottom left to move in counter-clockwise direction
+  printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" a' b' c' d' e' f' 
+  printfn "|-------------------------------|"
+  printfn "|-----------|~~%i~~|------------|" board.playerSouth.score
+  printfn "|________Player 2 score_________|"
+  ()
 
 
 
 [<EntryPoint>]
 let main _ =
-    
-
+    printfn "Hello from F#!"
     0 // return an integer exit code
