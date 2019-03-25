@@ -14,24 +14,26 @@ type StartingPosition =
   | South
 
 //testing new types
-type HasMoved = | NotMoved | Moved
+(*type HasMoved = | NotMoved | Moved
 type Board = Map<Cell, Piece option>
 type GameProgress = | InProgress | NorthWins | SouthWins | Draw
-type GameState = { Board: Board; NextMove: StartingPosition; Message: string }
+type GameState = { Board: Board; NextMove: StartingPosition; Message: string }*)
 
 type Player = {
   score: int
+  houses: (int*int*int*int*int*int)
   //side: StartingPosition
-  //isTurn: bool
+  isTurn: bool
   //victory: bool //if both players have victory, we must have a draw
 }
 
 
 type Board = {
-  a: int; b: int; c: int; d: int; e: int; f: int; 
-  a': int; b': int; c': int; d': int; e': int; f': int; 
-  PlayerNorth: Player
-  PlayerSouth: Player
+  (* int; b: int; c: int; d: int; e: int; f: int; 
+  a': int; b': int; c': int; d': int; e': int; f': int;*) 
+  //houses: int list
+  playerNorth: Player
+  playerSouth: Player
   toWin: int
 }
 
@@ -41,19 +43,20 @@ type Board = {
 (*getSeeds, which accepts a House number and a Board, and returns the number of
 seeds in the specified House*)
 let getSeeds n board = //Passes tests
+  let (a,b,c,d,e,f),(a',b',c',d',e',f') = board.playerNorth.houses, board.playerSouth.houses
   match n with 
-  |1 -> board.a
-  |2 -> board.b
-  |3 -> board.c
-  |4 -> board.d
-  |5 -> board.e
-  |6 -> board.f
-  |7 -> board.a'
-  |8 -> board.b'
-  |9 -> board.c'
-  |10 -> board.d'
-  |11 -> board.e'
-  |12 -> board.f'
+  |1 -> a
+  |2 -> b
+  |3 -> c
+  |4 -> d
+  |5 -> e
+  |6 -> f
+  |7 -> a'
+  |8 -> b'
+  |9 -> c'
+  |10 -> d'
+  |11 -> e'
+  |12 -> f'
   |_ -> failwith "invalid House"
 
 
@@ -75,13 +78,34 @@ that House.*)
 //
 //end psuedo code
 
-let collect board = failwith "Not implemented" //method to collect the seeds from a house and give them to a player
+let collect board house = //failwith "Not implemented" //method to collect the seeds from a house and give them to a player
+  let rec take house = 
+    match board.house with 
+    |2 | 3 -> take Previoushouse
+    |_ -> ()
+  ()
+()  
+
+let addToHouses n (a,b,c,d,e,f,a',b',c',d',e',f') =
+  match n with 
+    |1 -> (a+1,b,c,d,e,f,a',b',c',d',e',f')
+    |2 -> (a,b+1,c,d,e,f,a',b',c',d',e',f')
+    |3 -> (a,b,c+1,d,e,f,a',b',c',d',e',f')
+    |4 -> (a,b,c,d+1,e,f,a',b',c',d',e',f')
+    |5 -> (a,b,c,d,e+1,f,a',b',c',d',e',f')
+    |6 -> (a,b,c,d,e,f+1,a',b',c',d',e',f')
+    //Middle of board
+    |7 -> (a,b,c,d,e,f,a'+1,b',c',d',e',f')
+    |8 -> (a,b,c,d,e,f,a',b'+1,c',d',e',f')
+    |9 -> (a,b,c,d,e,f,a',b',c'+1,d',e',f')
+    |10 -> (a,b,c,d,e,f,a',b',c',d'+1,e',f')
+    |11 -> (a,b,c,d,e,f,a',b',c',d',e'+1,f')
+    |12 -> (a,b,c,d,e,f,a',b',c',d',e',f'+1)
+    |_ -> failwith "Invalid House Number"
+
 
 let useHouse n board = //failwith "Not implemented"
-    match getSeeds n with 
-    | a -> 1
-    | _ -> 0
-
+    
 (*
   let numS = getSeeds n in 
     let rec cnt j k = 
