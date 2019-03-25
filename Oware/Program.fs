@@ -61,7 +61,7 @@ let getSeeds n board = //Passes tests
 // N.B. you CAN'T take seeds from your own side
 //
 //end psuedo code
-
+(*
 let collect (a,b,c,d,e,f,a',b',c',d',e',f') board= //failwith "Not implemented" //method to collect the seeds from a house and give them to a player
   match board.PlayerTurn with 
     | North -> 
@@ -72,7 +72,7 @@ let collect (a,b,c,d,e,f,a',b',c',d',e',f') board= //failwith "Not implemented" 
     |_ -> ()
   ()
 ()  
-
+*)
 let addToSuburb n (a,b,c,d,e,f,a',b',c',d',e',f') =
   match n with 
     |1 -> (a+1,b,c,d,e,f,a',b',c',d',e',f')
@@ -112,7 +112,7 @@ let setHouseZero board n =
 useHouse: accepts a House number and a Board, and makes a move using
 that House.
 *)
-let useHouse n board = //failwith "Not implemented"
+let useHouse n board = failwith "Not implemented"
 
 
 
