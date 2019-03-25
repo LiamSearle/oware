@@ -162,7 +162,18 @@ let score board = failwith "Not implemented"
 (*gameState, which accepts a Board and gives back a string that tells us about the
 state of the game. Valid strings are “South’s turn”, “North’s turn”, “Game ended in a
 draw”, “South won”, and “North won”.*)
-let gameState board = failwith "Not implemented"
+let gameState board = //failwith "Not implemented"
+   let a,b = score board
+   match x > 24 with 
+   |true -> "South is The Campion! North takes the L"
+   |false -> match y > 24  with 
+            |true -> "North is The Campion! South takes the L"
+            |false -> match x = 24 && y = 24 with 
+                      |true ->  "Boo, its a Draw, take the L."
+                      |false ->  match board.isTurn with  
+                                |South -> "South's turn"
+                                |North -> "North's turn"
+
 
 let outputGame game = //function that takes in a game and prints out the Board and scores
     printfn "|________Player 1 score_________|" 
