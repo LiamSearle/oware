@@ -193,9 +193,6 @@ let outputGame game = //function that takes in a game and prints out the Board a
 
 [<EntryPoint>]
 let main _ =
-    //---------------------------------This needs to go into a method -------------------------------
-    (*let PlayerNorth = {player.score = 0; side = StartingPosition.North; isTurn = true; victory = false }
-    let PlayerSouth = {player.score = 0; side = StartingPosition.South; isTurn = false; victory = false }
-    *)
+    
 
     0 // return an integer exit code
