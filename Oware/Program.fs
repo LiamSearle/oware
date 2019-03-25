@@ -13,18 +13,11 @@ type StartingPosition =
   | North
   | South
 
-//testing new types
-(*type HasMoved = | NotMoved | Moved
-type Board = Map<Cell, Piece option>
-type GameProgress = | InProgress | NorthWins | SouthWins | Draw
-type GameState = { Board: Board; NextMove: StartingPosition; Message: string }*)
 
 type Player = {
   score: int
   houses: (int*int*int*int*int*int)
-  //side: StartingPosition
-  //isTurn: bool
-  //victory: bool //if both players have victory, we must have a draw
+  
 }
 
 type Turn = 
@@ -32,9 +25,7 @@ type Turn =
   | South
 
 type Board = {
-  (* int; b: int; c: int; d: int; e: int; f: int; 
-  a': int; b': int; c': int; d': int; e': int; f': int;*) 
-  //houses: int list
+ 
   playerNorth: Player
   playerSouth: Player
   toWin: int
