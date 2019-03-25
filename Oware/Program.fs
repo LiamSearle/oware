@@ -51,24 +51,6 @@ let getSeeds n board = //Passes tests
   |12 -> f'
   |_ -> failwith "invalid House"
 
-
-//getSeeds, count the seeds and itt. through them to distribute to Houses greater than the orig, can't use foe's House
-//
-//
-//Psuedo Code
-//
-//get the number of seeds from the given house
-//know which players turn it is
-//set that house to zero seeds
-//add 1 seed to each house after it
-//check if the total of the last house sums to 2 or 3
-//if it is check the one before it, do this recursivly untill != (2 or 3).
-//add the points to the player and remove them from the game
-//
-// N.B. you CAN'T take seeds from your own side
-//
-//end psuedo code
-
 //Adds seeds to the houses, will be made more use of later.
 let addToHouse n (a,b,c,d,e,f,a',b',c',d',e',f') =
   match n with 
@@ -109,57 +91,56 @@ let setHouseZero board n =
 //method to collect the seeds from a house and give them to a player if end seeds = 2 | 3
 let collect turn board = //failwith "Not implemented" 
  
+  // does update for adding points to player & sets house to 0 along with board updates
   let addPoints board amount n position =
     match position with  
     |North -> {board.playerSouth with score = board.playerSouth.score + amount; suburb = (setHouseZero board n).playerSouth.suburb}
     |South -> {board.playerSouth with score = board.playerSouth.score + amount; suburb = (setHouseZero board n).playerSouth.suburb}
   
-  let rec countNorthSeeds n board= 
-      match n  with 
-      |7 -> board
-      |_ -> match getSeeds n board, board.playerSouth.score = 25 && board.playerNorth.score = 25 with
-            |2,false -> countNorthSeeds  (n+1) {board with playerSouth = addPoints board 2 n North}
-            |3,false -> countNorthSeeds  (n+1) {board with playerSouth = addPoints board 3 n North}
-            |_,false -> countNorthSeeds  (n+1) board
+  //counts seeds on respective sides
+  let rec countNorthSeeds n board = 
+      match n with 
+      |7 -> board //Wrong side? Ignore.
+      |_ -> match getSeeds n board, board.playerSouth.score = 24 && board.playerNorth.score = 24 with //check game ended & no. seeds are in house
+            |2,false -> countNorthSeeds (n+1) {board with playerSouth = addPoints board 2 n North}
+            |3,false -> countNorthSeeds (n+1) {board with playerSouth = addPoints board 3 n North}
+            |_,false -> countNorthSeeds (n+1) board
             |_,_ -> board
 
-  let rec countSouthSeeds n board= 
-      match n  with 
-      |12 -> board
-      |_ -> match getSeeds n board, board.playerNorth.score = 25 && board.playerSouth.score = 25  with
-            |2,false -> countSouthSeeds  (n+1) {board with playerNorth = addPoints board 2 n South}
-            |3,false-> countSouthSeeds  (n+1) {board with playerNorth = addPoints board 3 n South}
-            |_,false-> countSouthSeeds  (n+1) board
+  let rec countSouthSeeds n board = 
+      match n with 
+      |12 -> board //Wrong side? Ignore.
+      |_ -> match getSeeds n board, board.playerNorth.score = 24 && board.playerSouth.score = 24  with  //check game ended & no. seeds are in house
+            |2,false -> countSouthSeeds (n+1) {board with playerNorth = addPoints board 2 n South}
+            |3,false-> countSouthSeeds (n+1) {board with playerNorth = addPoints board 3 n South}
+            |_,false-> countSouthSeeds (n+1) board
             |_,_ -> board
-
 
   match turn with 
   |North ->  countNorthSeeds  1 board
   |South ->  countSouthSeeds  7 board 
-
-
-  (*
-let (a,b,c,d,e,f),(a',b',c',d',e',f') = board.playerNorth.suburb, board.playerSouth.suburb in
-  match n=2||n=3 with
-  |false -> board
-  |true -> match board.PlayerTurn with  
-          |North -> match checkOwnHouse n board.PlayerTurn with
-                    |true -> board
-                    |false -> setHouseZero board n
-                              
-          |South -> 
-  |_ -> failwith "Error in start"
-  *)
-
-  
-
 
 (*
 useHouse: accepts a House number and a Board, and makes a move using
 that House.
 *)
 let useHouse n board = failwith "Not implemented"
-
+//getSeeds, count the seeds and itt. through them to distribute to Houses greater than the orig, can't use foe's House
+//
+//
+//Psuedo Code
+//
+//get the number of seeds from the given house
+//know which players turn it is
+//set that house to zero seeds
+//add 1 seed to each house after it
+//check if the total of the last house sums to 2 or 3
+//if it is check the one before it, do this recursivly untill != (2 or 3).
+//add the points to the player and remove them from the game
+//
+// N.B. you CAN'T take seeds from your own side
+//
+//end psuedo code
 
 
 (*
