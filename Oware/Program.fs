@@ -83,7 +83,7 @@ that House.*)
 //end psuedo code
 
 let collect (a,b,c,d,e,f,a',b',c',d',e',f') board= //failwith "Not implemented" //method to collect the seeds from a house and give them to a player
-  match 
+  match board.PlayerTurn
   
   let rec take house = 
     match board.house with 
