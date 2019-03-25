@@ -108,8 +108,6 @@ let setHouseZero board n =
   |12 -> {board with playerNorth = {board.playerNorth with suburb = (a',b',c',d',e',0)}}
   |_ -> failwith "Invalid House Number"
 
-let useHouse n board = //failwith "Not implemented"
-
 (*
 useHouse: accepts a House number and a Board, and makes a move using
 that House.
