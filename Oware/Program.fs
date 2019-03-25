@@ -16,7 +16,7 @@ type StartingPosition =
 
 type Player = {
   score: int
-  houses: (int*int*int*int*int*int)
+  suburb: (int*int*int*int*int*int)
   
 }
 
@@ -38,7 +38,7 @@ type Board = {
 (*getSeeds, which accepts a House number and a Board, and returns the number of
 seeds in the specified House*)
 let getSeeds n board = //Passes tests
-  let (a,b,c,d,e,f),(a',b',c',d',e',f') = board.playerNorth.houses, board.playerSouth.houses
+  let (a,b,c,d,e,f),(a',b',c',d',e',f') = board.playerNorth.suburb, board.playerSouth.suburb
   match n with 
   |1 -> a
   |2 -> b
@@ -57,13 +57,14 @@ let getSeeds n board = //Passes tests
 
 (*useHouse, which accepts a House number and a Board, and makes a move using
 that House.*)
-//getSeeds, count the seeds and itt. through them to distribute to Houses greater than the orig, can't use foe's House
+//getSeeds, count the seeds and itt. through them to distribute to suburb greater than the orig, can't use foe's House
 //
 //
 //Psuedo Code
 //
 //get the number of seeds from the given house
 //know which players turn it is
+//set that house to zero seeds
 //add 1 seed to each house after it
 //check if the total of the last house sums to 2 or 3
 //if it is check the one before it, do this recursivly untill != (2 or 3).
@@ -74,8 +75,9 @@ that House.*)
 //end psuedo code
 
 let collect (a,b,c,d,e,f,a',b',c',d',e',f') board= //failwith "Not implemented" //method to collect the seeds from a house and give them to a player
-  match board.PlayerTurn
-  
+  match board.PlayerTurn with 
+    | North -> 
+    | South ->
   let rec take house = 
     match board.house with 
     |2 | 3 -> take Previoushouse
@@ -83,7 +85,7 @@ let collect (a,b,c,d,e,f,a',b',c',d',e',f') board= //failwith "Not implemented" 
   ()
 ()  
 
-let addToHouses n (a,b,c,d,e,f,a',b',c',d',e',f') =
+let addToSuburb n (a,b,c,d,e,f,a',b',c',d',e',f') =
   match n with 
     |1 -> (a+1,b,c,d,e,f,a',b',c',d',e',f')
     |2 -> (a,b+1,c,d,e,f,a',b',c',d',e',f')
@@ -100,9 +102,26 @@ let addToHouses n (a,b,c,d,e,f,a',b',c',d',e',f') =
     |12 -> (a,b,c,d,e,f,a',b',c',d',e',f'+1)
     |_ -> failwith "Invalid House Number"
 
+let setHouseZero board n =
+  let (a,b,c,d,e,f),(a',b',c',d',e',f') = board.playerNorth.suburb, board.playerSouth.suburb
+  match n with
+  |1 -> {board with playerNorth = {board.playerNorth with suburb = (0,b,c,d,e,f)}}
+  |2 -> {board with playerNorth = {board.playerNorth with suburb = (a,0,c,d,e,f)}}
+  |3 -> {board with playerNorth = {board.playerNorth with suburb = (a,b,0,d,e,f)}}
+  |4 -> {board with playerNorth = {board.playerNorth with suburb = (a,b,c,0,e,f)}}
+  |5 -> {board with playerNorth = {board.playerNorth with suburb = (a,b,c,d,0,f)}}
+  |6 -> {board with playerNorth = {board.playerNorth with suburb = (a,b,c,d,e,0)}}
+  //-----------Middle of board-----------
+  |7 -> {board with playerNorth = {board.playerNorth with suburb = (0,b',c',d',e',f')}}
+  |8 -> {board with playerNorth = {board.playerNorth with suburb = (a',0,c',d',e',f')}}
+  |9 -> {board with playerNorth = {board.playerNorth with suburb = (a',b',0,d',e',f')}}
+  |10 -> {board with playerNorth = {board.playerNorth with suburb = (a',b',c',0,e',f')}}
+  |11 -> {board with playerNorth = {board.playerNorth with suburb = (a',b',c',d',0,f')}}
+  |12 -> {board with playerNorth = {board.playerNorth with suburb = (a',b',c',d',e',0)}}
+  |_ -> failwith "Invalid House Number"
 
 let useHouse n board = //failwith "Not implemented"
-    
+
 (*
   let numS = getSeeds n in 
     let rec cnt j k = 
