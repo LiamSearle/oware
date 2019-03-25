@@ -2,44 +2,28 @@
 //Due Thursday 28 March at 7pm
 //
 module Oware
-
 //--------------------------------------Types--------------------------
-//type House = {
-   //number: int
-  // numSeeds: int
-//}
-
 type StartingPosition =
   | North
   | South
 
-//testing new types
-(*type HasMoved = | NotMoved | Moved
-type Board = Map<Cell, Piece option>
-type GameProgress = | InProgress | NorthWins | SouthWins | Draw
-type GameState = { Board: Board; NextMove: StartingPosition; Message: string }*)
-
 type Player = {
   score: int
   houses: (int*int*int*int*int*int)
-  //side: StartingPosition
-  isTurn: bool
-  //victory: bool //if both players have victory, we must have a draw
 }
 
+type Turn = 
+  | North 
+  | South
 
 type Board = {
-  (* int; b: int; c: int; d: int; e: int; f: int; 
-  a': int; b': int; c': int; d': int; e': int; f': int;*) 
-  //houses: int list
   playerNorth: Player
   playerSouth: Player
   toWin: int
+  PlayerTurn: Turn
 }
-
 //--------------------------------------End Types--------------------------
  
-
 (*getSeeds, which accepts a House number and a Board, and returns the number of
 seeds in the specified House*)
 let getSeeds n board = //Passes tests
@@ -60,8 +44,6 @@ let getSeeds n board = //Passes tests
   |_ -> failwith "invalid House"
 
 
-(*useHouse, which accepts a House number and a Board, and makes a move using
-that House.*)
 //getSeeds, count the seeds and itt. through them to distribute to Houses greater than the orig, can't use foe's House
 //
 //
@@ -78,7 +60,9 @@ that House.*)
 //
 //end psuedo code
 
-let collect board house = //failwith "Not implemented" //method to collect the seeds from a house and give them to a player
+let collect (a,b,c,d,e,f,a',b',c',d',e',f') board= //failwith "Not implemented" //method to collect the seeds from a house and give them to a player
+  match board.PlayerTurn
+  
   let rec take house = 
     match board.house with 
     |2 | 3 -> take Previoushouse
@@ -103,20 +87,18 @@ let addToHouses n (a,b,c,d,e,f,a',b',c',d',e',f') =
     |12 -> (a,b,c,d,e,f,a',b',c',d',e',f'+1)
     |_ -> failwith "Invalid House Number"
 
-
-let useHouse n board = //failwith "Not implemented"
-    
 (*
-  let numS = getSeeds n in 
-    let rec cnt j k = 
-        match numS = 0 with //doesn't work yet needs to be properly implemented.
-        |true -> k
-        |_ -> cnt (j-1) (k + 1)
-    cnt n 1
+useHouse: accepts a House number and a Board, and makes a move using
+that House.
 *)
+let useHouse n board = //failwith "Not implemented"
 
-(*start, which accepts a StartingPosition and returns an initialized game where the
-person in the StartingPosition starts the game*)
+
+
+(*
+start: accepts a StartingPosition and returns an initialized game where the
+person in the StartingPosition starts the game
+*)
 let start position = 
   match position with  
   |North -> {
@@ -149,22 +131,27 @@ let start position =
 
 //failwith "Not implemented"
 
-(*score, which accepts a Board and gives back a tuple of (southScore , northScore)*)
-let score board = failwith "Not implemented"
+(*
+Score: accepts a Board and gives back a tuple of (southScore , northScore)
+*)
+let score board = 
+  let playerSouth.score, playerNorth.score = board.playerSouth.score, board.playerNorth.score
+  playerSouth.score, playerNorth.score 
 
-
-(*gameState, which accepts a Board and gives back a string that tells us about the
+(*
+gameState: accepts a Board and gives back a string that tells us about the
 state of the game. Valid strings are “South’s turn”, “North’s turn”, “Game ended in a
-draw”, “South won”, and “North won”.*)
-let gameState board = //failwith "Not implemented"
+draw”, “South won”, and “North won”.
+*)
+let gameState board = 
    let a,b = score board
    match x > 24 with 
-   |true -> "South is The Campion! North takes the L"
+   |true -> "South won"
    |false -> match y > 24  with 
-            |true -> "North is The Campion! South takes the L"
+            |true -> "North won"
             |false -> match x = 24 && y = 24 with 
-                      |true ->  "Boo, its a Draw, take the L."
-                      |false ->  match board.isTurn with  
+                      |true ->  "Game ended in a draw"
+                      |false ->  match board.PlayerTurn with  
                                 |South -> "South's turn"
                                 |North -> "North's turn"
 
