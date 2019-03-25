@@ -94,7 +94,7 @@ let addToHouses n (a,b,c,d,e,f,a',b',c',d',e',f') =
     |4 -> (a,b,c,d+1,e,f,a',b',c',d',e',f')
     |5 -> (a,b,c,d,e+1,f,a',b',c',d',e',f')
     |6 -> (a,b,c,d,e,f+1,a',b',c',d',e',f')
-    //Middle of board
+    //-----------Middle of board-----------
     |7 -> (a,b,c,d,e,f,a'+1,b',c',d',e',f')
     |8 -> (a,b,c,d,e,f,a',b'+1,c',d',e',f')
     |9 -> (a,b,c,d,e,f,a',b',c'+1,d',e',f')
