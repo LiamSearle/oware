@@ -68,6 +68,8 @@ that House.*)
 //
 //end psuedo code
 
+let collect board = failwith "Not implemented" //method to collect the seeds from a house and give them to a player
+
 let useHouse n board = failwith "Not implemented"
 (*
   let numS = getSeeds n in 
