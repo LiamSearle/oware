@@ -19,11 +19,19 @@ type Turn =
 type Board = {
   playerNorth: Player
   playerSouth: Player
-  toWin: int
   PlayerTurn: Turn
 }
 //--------------------------------------End Types--------------------------
  
+let checkOwnHouse n side = 
+  match side with 
+  |North -> match n with 
+            |1|2|3|4|5|6 -> false
+            |_ -> true
+  |South -> match n with 
+            |7|8|9|10|11|12 -> false
+            |_ -> true    
+
 (*getSeeds, which accepts a House number and a Board, and returns the number of
 seeds in the specified House*)
 let getSeeds n board = //Passes tests
@@ -61,18 +69,8 @@ let getSeeds n board = //Passes tests
 //
 //end psuedo code
 
-let collect (a,b,c,d,e,f,a',b',c',d',e',f') board = failwith "Not implemented" //method to collect the seeds from a house and give them to a player
- (* match board.PlayerTurn with 
-    | North -> 
-    | South ->
-  let rec take house = 
-    match board.house with 
-    |2 | 3 -> take Previoushouse
-    |_ -> ()
-  ()
-() *) 
-
-let addToSuburb n (a,b,c,d,e,f,a',b',c',d',e',f') =
+//Adds seeds to the houses, will be made more use of later.
+let addToHouse n (a,b,c,d,e,f,a',b',c',d',e',f') =
   match n with 
     |1 -> (a+1,b,c,d,e,f,a',b',c',d',e',f')
     |2 -> (a,b+1,c,d,e,f,a',b',c',d',e',f')
@@ -89,6 +87,7 @@ let addToSuburb n (a,b,c,d,e,f,a',b',c',d',e',f') =
     |12 -> (a,b,c,d,e,f,a',b',c',d',e',f'+1)
     |_ -> failwith "Invalid House Number"
 
+//sets the chosen house to 0 so its seed can be distributed later ;)
 let setHouseZero board n =
   let (a,b,c,d,e,f),(a',b',c',d',e',f') = board.playerNorth.suburb, board.playerSouth.suburb
   match n with
@@ -98,7 +97,7 @@ let setHouseZero board n =
   |4 -> {board with playerNorth = {board.playerNorth with suburb = (a,b,c,0,e,f)}}
   |5 -> {board with playerNorth = {board.playerNorth with suburb = (a,b,c,d,0,f)}}
   |6 -> {board with playerNorth = {board.playerNorth with suburb = (a,b,c,d,e,0)}}
-  //-----------Middle of board-----------
+  //----------------------------Middle of board----------------------------------------
   |7 -> {board with playerNorth = {board.playerNorth with suburb = (0,b',c',d',e',f')}}
   |8 -> {board with playerNorth = {board.playerNorth with suburb = (a',0,c',d',e',f')}}
   |9 -> {board with playerNorth = {board.playerNorth with suburb = (a',b',0,d',e',f')}}
@@ -106,6 +105,54 @@ let setHouseZero board n =
   |11 -> {board with playerNorth = {board.playerNorth with suburb = (a',b',c',d',0,f')}}
   |12 -> {board with playerNorth = {board.playerNorth with suburb = (a',b',c',d',e',0)}}
   |_ -> failwith "Invalid House Number"
+
+//method to collect the seeds from a house and give them to a player if end seeds = 2 | 3
+let collect turn board = //failwith "Not implemented" 
+ 
+  let addPoints board amount n position =
+    match position with  
+    |North -> {board.playerSouth with score = board.playerSouth.score + amount; suburb = (setHouseZero board n).playerSouth.suburb}
+    |South -> {board.playerSouth with score = board.playerSouth.score + amount; suburb = (setHouseZero board n).playerSouth.suburb}
+  
+  let rec countNorthSeeds n board= 
+      match n  with 
+      |7 -> board
+      |_ -> match getSeeds n board, board.playerSouth.score = 25 && board.playerNorth.score = 25 with
+            |2,false -> countNorthSeeds  (n+1) {board with playerSouth = addPoints board 2 n North}
+            |3,false -> countNorthSeeds  (n+1) {board with playerSouth = addPoints board 3 n North}
+            |_,false -> countNorthSeeds  (n+1) board
+            |_,_ -> board
+
+  let rec countSouthSeeds n board= 
+      match n  with 
+      |12 -> board
+      |_ -> match getSeeds n board, board.playerNorth.score = 25 && board.playerSouth.score = 25  with
+            |2,false -> countSouthSeeds  (n+1) {board with playerNorth = addPoints board 2 n South}
+            |3,false-> countSouthSeeds  (n+1) {board with playerNorth = addPoints board 3 n South}
+            |_,false-> countSouthSeeds  (n+1) board
+            |_,_ -> board
+
+
+  match turn with 
+  |North ->  countNorthSeeds  1 board
+  |South ->  countSouthSeeds  7 board 
+
+
+  (*
+let (a,b,c,d,e,f),(a',b',c',d',e',f') = board.playerNorth.suburb, board.playerSouth.suburb in
+  match n=2||n=3 with
+  |false -> board
+  |true -> match board.PlayerTurn with  
+          |North -> match checkOwnHouse n board.PlayerTurn with
+                    |true -> board
+                    |false -> setHouseZero board n
+                              
+          |South -> 
+  |_ -> failwith "Error in start"
+  *)
+
+  
+
 
 (*
 useHouse: accepts a House number and a Board, and makes a move using
@@ -125,31 +172,13 @@ let start position =
     playerNorth = {score = 0; suburb = (4,4,4,4,4,4)}
     playerSouth = {score = 0; suburb = (4,4,4,4,4,4)}
     PlayerTurn = North
-    toWin = 25
     }
   |South -> {
     playerNorth = {score = 0; suburb = (4,4,4,4,4,4)}
     playerSouth = {score = 0; suburb = (4,4,4,4,4,4)}
     PlayerTurn = South
-    toWin = 25
     }
   |_ -> failwith "Error in start"
- 
- 
- (* let Game1 = {
-    gameBoard = {a = 4; b = 4; c = 4; d = 4; e = 4; f = 4; a' = 4; b' = 4; c' = 4; d' = 4; e' = 4; f' = 4;}
-    PlayerNorth = {score = 0; side = North; isTurn = false; victory = false}
-    PlayerSouth = {score = 0; side = South; isTurn = false; victory = false}
-    toWin = 25
-    }//Game.StartingPlayer = start }
-    match position with
-    |South -> (PlayerSouth with isTurn = true)
-    |North -> (PlayerSouth with isTurn = true)
-    |_ -> failwith "Error in player turn"
-  Game1*)
-  
-
-//failwith "Not implemented"
 
 (*
 Score: accepts a Board and gives back a tuple of (southScore , northScore)
@@ -158,6 +187,11 @@ let score board =
   let x,y = board.playerNorth.score, board.playerSouth.score
   y,x
 
+//changes the turn to the other player after a player has had their turn
+let changeTurn position = 
+    match position with
+    | North -> South 
+    | South -> North 
 
 (*
 gameState: accepts a Board and gives back a string that tells us about the
@@ -182,9 +216,9 @@ let outputGame board = //function that takes in a game and prints out the Board 
   printfn "|________Player 1 score_________|" 
   printfn "|-----------|~~%i~~|------------|" board.playerNorth.score
   printfn "|-------------------------------|"
-  printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" a b c d e f 
+  printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" f' e' d' c' b' a' 
   printfn "|-------------------------------|" //start bottom left to move in counter-clockwise direction
-  printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" a' b' c' d' e' f' 
+  printfn "|-[%i]-[%i]-[%i]-[%i]-[%i]-[%i]-|" a b c d e f 
   printfn "|-------------------------------|"
   printfn "|-----------|~~%i~~|------------|" board.playerSouth.score
   printfn "|________Player 2 score_________|"
