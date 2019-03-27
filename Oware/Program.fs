@@ -69,7 +69,7 @@ let addToHouse n (a,b,c,d,e,f,a',b',c',d',e',f') =
     |12 -> (a,b,c,d,e,f,a',b',c',d',e',f'+1)
     |_ -> failwith "Invalid House Number"
 
-//sets the chosen house to 0 so its seed can be distributed later ;)
+//sets the chosen house to 0 so its seed can be distributed later
 let setHouseZero board n =
   let (a,b,c,d,e,f),(a',b',c',d',e',f') = board.playerNorth.suburb, board.playerSouth.suburb
   match n with
@@ -120,11 +120,21 @@ let collect turn board = //failwith "Not implemented"
   |North ->  countNorthSeeds  1 board
   |South ->  countSouthSeeds  7 board 
 
+let rec moveSeeds n leftOverSeeds startHouse houses = //needs to take in a house to move to next, the seeds that are left to move, the house it starts with and the board itself as one tuple of houses for itterating
+  let n = match (n=13) with//loop around to the first house when n moves on from the last house
+          |true -> 1
+          |_ -> n
+  match leftOverSeeds with // if there are still seeds to sew then call the function again
+  |0 -> houses
+  |_ -> match n = startHouse with //if the house is the startHouse then just increase the house value but down remove a seed or add to the house.
+        |false -> moveSeeds (n+1) (leftOverSeeds-1) startHouse (addToHouse n houses)
+        |_ -> moveSeeds (n+1) (leftOverSeeds) (startHouse) (houses)
+                       
 (*
 useHouse: accepts a House number and a Board, and makes a move using
 that House.
 *)
-let useHouse n board = failwith "Not implemented"
+let useHouse n board = //failwith "Not implemented"
 //getSeeds, count the seeds and itt. through them to distribute to Houses greater than the orig, can't use foe's House
 //
 //
@@ -141,6 +151,31 @@ let useHouse n board = failwith "Not implemented"
 // N.B. you CAN'T take seeds from your own side
 //
 //end psuedo code
+
+//-----------------------Pre-Checks-----------------------------------------------------------------------
+
+  match (getSeeds n board) with //check if the player selected a house with no seeds in it
+  |0 -> board //if they have do nothing
+  |_ -> //otherwise carry on with the function
+
+  match (checkOwnHouse n board) with//check if the player has selected their own house
+  |false -> board//if they have then chnage nothing
+  |_ -> //else carry on with the function
+
+
+//-----------------------End Pre-Checks--------------------------------------------------------------------
+
+  let (a,b,c,d,e,f),(a',b',c',d',e',f') = (setHouseZero board n).playerNorth.suburb,(setHouseZero board n).playerSouth.suburb // set the house to zero that the player has chosen
+  let seeds = getSeeds n board // get the seeds from the house
+  let combinedSuburbs = (a,b,c,d,e,f,a',b',c',d',e',f') //combine the two sides of the board to allow the seeds to be distributed properly.
+
+  let combinedSuburbs = moveSeeds (n+1) seeds n combinedSuburbs//move the seeds around the board and update the board.
+
+  //give the players their points
+
+  //update the game state with all the changes
+
+  //give the game inputs and outputs etc. ie. make it run.
 
 
 (*
