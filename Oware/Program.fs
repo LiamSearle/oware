@@ -244,5 +244,7 @@ let outputGame board = //function that takes in a game and prints out the Board 
 
 [<EntryPoint>]
 let main _ =
+    let startgame = start North
+    
     printfn "Hello from F#!"
     0 // return an integer exit code
